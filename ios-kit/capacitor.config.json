@@ -1,0 +1,6 @@
+{
+  "appId": "app.fitduo.ios",
+  "appName": "FitDuo",
+  "webDir": "www",
+  "ios": { "contentInset": "never", "backgroundColor": "#f4f6f5" }
+}

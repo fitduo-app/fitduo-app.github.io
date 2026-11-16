@@ -1,0 +1,16 @@
+{
+  "name": "fitduo-ios",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "copy-web": "rm -rf www && mkdir www && rsync -a --exclude ios-kit --exclude .git --exclude .github --exclude .well-known --exclude .nojekyll --exclude codemagic.yaml --exclude sw.js ../ www/"
+  },
+  "dependencies": {
+    "@capacitor/core": "6.1.2",
+    "@capacitor/ios": "6.1.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "6.1.2",
+    "@capacitor/assets": "3.0.5"
+  }
+}

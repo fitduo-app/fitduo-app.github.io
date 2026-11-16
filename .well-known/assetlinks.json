@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "app.fitduo.twa",
+    "sha256_cert_fingerprints": ["ВСТАВ_СЮДИ_SHA256_З_PWABUILDER_АБО_PLAY_CONSOLE"]
+  }
+}]

@@ -1,0 +1,45 @@
+# FitDuo: iPhone build in the cloud (no Mac needed). Codemagic reads this file from the root of the repo.
+# Needs in Codemagic: an App Store Connect API key integration named "fitduo_asc" (see the guide).
+workflows:
+  fitduo-ios:
+    name: FitDuo iOS
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    integrations:
+      app_store_connect: fitduo_asc
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: app.fitduo.ios
+      node: 20
+      xcode: latest
+      vars:
+        BUNDLE_ID: app.fitduo.ios
+    scripts:
+      - name: Install
+        script: cd ios-kit && npm install
+      - name: Copy web app
+        script: cd ios-kit && npm run copy-web
+      - name: Add iOS platform
+        script: cd ios-kit && npx cap add ios && npx cap sync ios
+      - name: App icon
+        script: |
+          cd ios-kit && mkdir -p assets && cp ../icons/ios-1024.png assets/icon-only.png
+          npx capacitor-assets generate --ios --iconBackgroundColor '#12a150' || true
+      - name: Permissions text (camera for barcodes)
+        script: |
+          PL=ios-kit/ios/App/App/Info.plist
+          /usr/libexec/PlistBuddy -c "Add :NSCameraUsageDescription string 'FitDuo uses the camera only to scan food barcodes.'" $PL || true
+          /usr/libexec/PlistBuddy -c "Add :ITSAppUsesNonExemptEncryption bool false" $PL || true
+      - name: Signing
+        script: xcode-project use-profiles
+      - name: Build number
+        script: cd ios-kit/ios/App && agvtool new-version -all $BUILD_NUMBER
+      - name: Build IPA
+        script: xcode-project build-ipa --workspace "ios-kit/ios/App/App.xcworkspace" --scheme "App"
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true

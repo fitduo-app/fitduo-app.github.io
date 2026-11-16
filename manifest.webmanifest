@@ -1,0 +1,20 @@
+{
+  "name": "FitDuo — калорії і тренування",
+  "short_name": "FitDuo",
+  "description": "Calorie diary + workout diary in one app: personal plan, 183 exercises with illustrations, smart advice. UA / RU / EN / ES.",
+  "id": "/",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f4f6f5",
+  "theme_color": "#12a150",
+  "lang": "uk",
+  "categories": ["health", "fitness", "lifestyle"],
+  "icons": [
+    {"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ],
+  "screenshots": []
+}
